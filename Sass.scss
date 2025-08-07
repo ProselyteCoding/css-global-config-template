@@ -1,0 +1,227 @@
+// _variables.scss - 将 CSS 变量转换为 Sass 变量
+/* 颜色系统变量 */
+$primary-color: /* 主要颜色 */;
+$secondary-color: /* 次要颜色 */;
+$accent-color: /* 强调色 */;
+$background-color: /* 背景色 */;
+$surface-color: /* 表面色 */;
+$text-primary: /* 主要文字颜色 */;
+$text-secondary: /* 次要文字颜色 */;
+$text-muted: /* 弱化文字颜色 */;
+$border-color: /* 边框颜色 */;
+$error-color: /* 错误颜色 */;
+$success-color: /* 成功颜色 */;
+$warning-color: /* 警告颜色 */;
+$info-color: /* 信息颜色 */;
+
+/* 字体大小系统 */
+$font-sizes: (
+  xs: /* 特小字体 */,
+  sm: /* 小字体 */,
+  base: /* 基础字体 */,
+  lg: /* 大字体 */,
+  xl: /* 特大字体 */,
+  2xl: /* 超大字体 */
+);
+
+/* 间距系统 */
+$spacings: (
+  xs: /* 特小间距 */,
+  sm: /* 小间距 */,
+  md: /* 中等间距 */,
+  lg: /* 大间距 */,
+  xl: /* 特大间距 */,
+  2xl: /* 超大间距 */
+);
+
+/* 圆角系统 */
+$border-radius: (
+  xs: /* 特小圆角 */,
+  sm: /* 小圆角 */,
+  md: /* 中等圆角 */,
+  lg: /* 大圆角 */,
+  xl: /* 特大圆角 */,
+  full: 9999px
+);
+
+/* 阴影系统 */
+$shadows: (
+  xs: /* 特小阴影 */,
+  sm: /* 小阴影 */,
+  md: /* 中等阴影 */,
+  lg: /* 大阴影 */,
+  xl: /* 特大阴影 */
+);
+
+/* 字体族系统 */
+$font-family-sans: /* 无衬线字体栈 */;
+$font-family-serif: /* 衬线字体栈 */;
+$font-family-mono: /* 等宽字体栈 */;
+
+/* 行高系统 */
+$line-heights: (
+  tight: 1.25,
+  normal: 1.5,
+  relaxed: 1.75
+);
+
+/* 过渡动画系统 */
+$transitions: (
+  fast: 0.15s ease-in-out,
+  base: 0.3s ease-in-out,
+  slow: 0.5s ease-in-out
+);
+
+/* Z-index 层级系统 */
+$z-indexes: (
+  dropdown: 1000,
+  sticky: 1020,
+  fixed: 1030,
+  modal-backdrop: 1040,
+  modal: 1050,
+  popover: 1060,
+  tooltip: 1070,
+  toast: 1080
+);
+
+// _mixins.scss - 实用混入函数
+/* 响应式断点混入 */
+@mixin responsive($breakpoint) {
+  @if $breakpoint == xs {
+    @media (max-width: 480px) { @content; }
+  }
+  @if $breakpoint == sm {
+    @media (max-width: 768px) { @content; }
+  }
+  @if $breakpoint == md {
+    @media (max-width: 1024px) { @content; }
+  }
+  @if $breakpoint == lg {
+    @media (min-width: 1025px) { @content; }
+  }
+}
+
+/* 快速设置字体样式混入 */
+@mixin font-style($size: base, $weight: 400, $line-height: normal) {
+  font-size: map-get($font-sizes, $size);
+  font-weight: $weight;
+  line-height: map-get($line-heights, $line-height);
+}
+
+/* 快速设置间距混入 */
+@mixin spacing($property, $size) {
+  #{$property}: map-get($spacings, $size);
+}
+
+/* 快速设置阴影混入 */
+@mixin shadow($size: md) {
+  box-shadow: map-get($shadows, $size);
+}
+
+/* 快速设置圆角混入 */
+@mixin rounded($size: md) {
+  border-radius: map-get($border-radius, $size);
+}
+
+/* 快速设置过渡混入 */
+@mixin transition($duration: base, $property: all) {
+  transition: $property map-get($transitions, $duration);
+}
+
+/* 按钮样式混入 */
+@mixin button-base {
+  /* 继承上述按钮基础样式 */
+  display: inline-block;
+  padding: map-get($spacings, sm) map-get($spacings, md);
+  border: none;
+  @include rounded(md);
+  @include font-style(base, 500);
+  @include transition(fast);
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+/* 卡片样式混入 */
+@mixin card {
+  background-color: $surface-color;
+  @include rounded(lg);
+  @include shadow(md);
+  @include spacing(padding, lg);
+}
+
+// _utilities.scss - 工具类生成器
+/* 自动生成间距工具类 */
+@each $name, $value in $spacings {
+  .m-#{$name} { margin: $value; }
+  .mt-#{$name} { margin-top: $value; }
+  .mr-#{$name} { margin-right: $value; }
+  .mb-#{$name} { margin-bottom: $value; }
+  .ml-#{$name} { margin-left: $value; }
+  
+  .p-#{$name} { padding: $value; }
+  .pt-#{$name} { padding-top: $value; }
+  .pr-#{$name} { padding-right: $value; }
+  .pb-#{$name} { padding-bottom: $value; }
+  .pl-#{$name} { padding-left: $value; }
+}
+
+/* 自动生成字体大小工具类 */
+@each $name, $value in $font-sizes {
+  .text-#{$name} {
+    font-size: $value;
+  }
+}
+
+/* 自动生成圆角工具类 */
+@each $name, $value in $border-radius {
+  .rounded-#{$name} {
+    border-radius: $value;
+  }
+}
+
+/* 自动生成阴影工具类 */
+@each $name, $value in $shadows {
+  .shadow-#{$name} {
+    box-shadow: $value;
+  }
+}
+
+// main.scss - 主样式文件
+@import 'variables';  /* 导入变量 */
+@import 'mixins';     /* 导入混入 */
+
+/* 在这里包含上述完整的通用 CSS 模板 */
+/* 但将 CSS 变量替换为对应的 Sass 变量 */
+
+/* 然后导入工具类和组件样式 */
+@import 'utilities';  /* 导入工具类 */
+
+/* 组件样式示例 */
+.btn {
+  @include button-base;  /* 使用按钮混入 */
+  background-color: $primary-color;
+  color: white;
+  
+  &:hover {
+    background-color: darken($primary-color, 10%);  /* Sass 颜色函数 */
+  }
+}
+
+.card {
+  @include card;  /* 使用卡片混入 */
+}
+
+/* 响应式组件示例 */
+.hero-section {
+  @include spacing(padding, xl);
+  
+  @include responsive(sm) {
+    @include spacing(padding, md);  /* 小屏幕上减少内边距 */
+  }
+}

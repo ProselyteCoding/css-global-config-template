@@ -1,0 +1,757 @@
+/* App.css */
+
+/* ========== CSS变量定义 ========== */
+:root {
+  /* 颜色系统 */
+  --primary-color: /* 主要颜色 */;
+  --secondary-color: /* 次要颜色 */;
+  --accent-color: /* 强调色 */;
+  --background-color: /* 背景色 */;
+  --surface-color: /* 表面色 */;
+  --text-primary: /* 主要文字颜色 */;
+  --text-secondary: /* 次要文字颜色 */;
+  --text-muted: /* 弱化文字颜色 */;
+  --border-color: /* 边框颜色 */;
+  --divider-color: /* 分割线颜色 */;
+  --shadow-color: /* 阴影颜色 */;
+  --error-color: /* 错误颜色 */;
+  --success-color: /* 成功颜色 */;
+  --warning-color: /* 警告颜色 */;
+  --info-color: /* 信息颜色 */;
+  
+  /* 尺寸系统 */
+  --font-size-xs: /* 特小字体 */;
+  --font-size-sm: /* 小字体 */;
+  --font-size-base: /* 基础字体 */;
+  --font-size-lg: /* 大字体 */;
+  --font-size-xl: /* 特大字体 */;
+  --font-size-2xl: /* 超大字体 */;
+  
+  /* 间距系统 */
+  --spacing-xs: /* 特小间距 */;
+  --spacing-sm: /* 小间距 */;
+  --spacing-md: /* 中等间距 */;
+  --spacing-lg: /* 大间距 */;
+  --spacing-xl: /* 特大间距 */;
+  --spacing-2xl: /* 超大间距 */;
+  
+  /* 圆角系统 */
+  --border-radius-xs: /* 特小圆角 */;
+  --border-radius-sm: /* 小圆角 */;
+  --border-radius-md: /* 中等圆角 */;
+  --border-radius-lg: /* 大圆角 */;
+  --border-radius-xl: /* 特大圆角 */;
+  --border-radius-full: 9999px; /* 完全圆角 */;
+  
+  /* 阴影系统 */
+  --shadow-xs: /* 特小阴影 */;
+  --shadow-sm: /* 小阴影 */;
+  --shadow-md: /* 中等阴影 */;
+  --shadow-lg: /* 大阴影 */;
+  --shadow-xl: /* 特大阴影 */;
+  
+  /* 过渡动画 */
+  --transition-fast: 0.15s ease-in-out; /* 快速过渡 */
+  --transition-base: 0.3s ease-in-out; /* 基础过渡 */
+  --transition-slow: 0.5s ease-in-out; /* 缓慢过渡 */
+  
+  /* 字体系统 */
+  --font-family-sans: /* 无衬线字体栈 */;
+  --font-family-serif: /* 衬线字体栈 */;
+  --font-family-mono: /* 等宽字体栈 */;
+  
+  /* 行高系统 */
+  --line-height-tight: 1.25; /* 紧密行高 */
+  --line-height-normal: 1.5; /* 正常行高 */
+  --line-height-relaxed: 1.75; /* 宽松行高 */
+  
+  /* Z-index 层级系统 */
+  --z-dropdown: 1000; /* 下拉菜单层级 */
+  --z-sticky: 1020; /* 粘性定位层级 */
+  --z-fixed: 1030; /* 固定定位层级 */
+  --z-modal-backdrop: 1040; /* 模态框背景层级 */
+  --z-modal: 1050; /* 模态框层级 */
+  --z-popover: 1060; /* 弹出框层级 */
+  --z-tooltip: 1070; /* 工具提示层级 */
+  --z-toast: 1080; /* 通知层级 */
+}
+
+/* ========== 全局重置样式 ========== */
+*,
+*::before,
+*::after {
+  margin: 0; /* 重置外边距 */
+  padding: 0; /* 重置内边距 */
+  box-sizing: border-box; /* 边框盒模型，包含边框和内边距在宽高内 */
+}
+
+/* ========== HTML根元素配置 ========== */
+html {
+  font-size: 16px; /* 基础字体大小，用于rem单位计算 */
+  line-height: var(--line-height-normal); /* 文档行高 */
+  -webkit-text-size-adjust: 100%; /* 防止iOS字体缩放 */
+  -ms-text-size-adjust: 100%; /* 防止Windows Phone字体缩放 */
+  scroll-behavior: smooth; /* 平滑滚动行为 */
+  -webkit-tap-highlight-color: transparent; /* 移除移动端点击高亮 */
+}
+
+/* ========== 文档主体配置 ========== */
+body {
+  font-family: var(--font-family-sans), Arial, sans-serif; /* 全局字体族，优先使用变量 */
+  font-size: var(--font-size-base); /* 基础字体大小 */
+  line-height: var(--line-height-normal); /* 行高，影响文本可读性 */
+  color: var(--text-primary); /* 全局文字颜色 */
+  background-color: var(--background-color); /* 全局背景颜色 */
+  font-weight: 400; /* 正常字体粗细 */
+  font-feature-settings: 'kern' 1; /* 启用字体字距调整 */
+  -webkit-font-smoothing: antialiased; /* Mac/iOS字体平滑渲染 */
+  -moz-osx-font-smoothing: grayscale; /* Firefox Mac字体平滑渲染 */
+  text-rendering: optimizeLegibility; /* 优化文本渲染，提高可读性 */
+  overflow-x: hidden; /* 防止水平滚动条 */
+  min-height: 100vh; /* 最小高度为视口高度 */
+}
+
+/* ========== 基础元素重置 ========== */
+/* 标题元素重置 */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: /* 标题字体粗细 */;
+  line-height: var(--line-height-tight); /* 标题行高，通常比正文紧密 */
+  color: var(--text-primary); /* 标题颜色 */
+  margin-bottom: var(--spacing-sm); /* 标题底部间距 */
+}
+
+/* 段落元素 */
+p {
+  margin-bottom: var(--spacing-md); /* 段落底部间距 */
+  color: var(--text-primary); /* 段落文字颜色 */
+}
+
+/* 强调元素 */
+strong, b {
+  font-weight: 700; /* 加粗文字 */
+}
+
+em, i {
+  font-style: italic; /* 斜体文字 */
+}
+
+/* 小号文字 */
+small {
+  font-size: var(--font-size-sm); /* 小号字体 */
+  color: var(--text-secondary); /* 次要文字颜色 */
+}
+
+/* 删除线文字 */
+del {
+  text-decoration: line-through; /* 删除线 */
+  color: var(--text-muted); /* 弱化颜色 */
+}
+
+/* 标记文字 */
+mark {
+  background-color: /* 标记背景色 */;
+  color: /* 标记文字色 */;
+  padding: /* 标记内边距 */;
+  border-radius: var(--border-radius-xs); /* 标记圆角 */
+}
+
+/* 上标下标 */
+sup, sub {
+  font-size: 0.75em; /* 上下标字体大小 */
+  line-height: 0; /* 不影响行高 */
+  position: relative; /* 相对定位 */
+  vertical-align: baseline; /* 基线对齐 */
+}
+
+sup {
+  top: -0.5em; /* 上标位置 */
+}
+
+sub {
+  bottom: -0.25em; /* 下标位置 */
+}
+
+/* ========== 选择文本样式 ========== */
+::selection {
+  background-color: /* 选择文本背景色 */;
+  color: /* 选择文本颜色 */;
+  text-shadow: none; /* 去除文本阴影 */
+}
+
+::-moz-selection {
+  background-color: /* Firefox选择文本背景色 */;
+  color: /* Firefox选择文本颜色 */;
+  text-shadow: none; /* 去除文本阴影 */
+}
+
+/* ========== 焦点样式 ========== */
+:focus {
+  outline: /* 焦点轮廓样式 */;
+  outline-offset: /* 焦点轮廓偏移 */;
+}
+
+/* 仅在键盘导航时显示焦点 */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: /* 键盘焦点轮廓 */;
+  outline-offset: /* 键盘焦点偏移 */;
+}
+
+/* ========== 滚动条样式配置 ========== */
+
+/* 方案一：PC端滚动条样式 */
+@media (min-width: 769px) {
+  ::-webkit-scrollbar {
+    width: /* 滚动条宽度 */;
+    height: /* 水平滚动条高度 */;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: /* 轨道背景色 */;
+    border-radius: /* 轨道圆角 */;
+    /* 可添加阴影或边框效果 */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: /* 滑块背景色或渐变 */;
+    border-radius: /* 滑块圆角 */;
+    border: /* 滑块边框 */;
+    /* 可添加阴影效果 */
+    transition: /* 悬停过渡效果 */;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: /* 悬停时滑块颜色 */;
+    /* 悬停时的其他样式变化 */
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background: /* 点击时滑块颜色 */;
+  }
+
+  /* Firefox 支持 */
+  * {
+    scrollbar-width: /* auto | thin | none */;
+    scrollbar-color: /* 滑块颜色 轨道颜色 */;
+  }
+}
+
+/* 方案二：移动端滚动条样式 */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: /* 移动端滚动条宽度，建议更细 */;
+    height: /* 移动端水平滚动条高度 */;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: /* 移动端轨道背景，建议透明或很淡 */;
+    border-radius: /* 轨道圆角 */;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: /* 移动端滑块颜色，建议半透明 */;
+    border-radius: /* 滑块圆角 */;
+    /* 移动端通常不需要太多装饰效果 */
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: /* 移动端悬停效果，可选 */;
+  }
+
+  /* Firefox 移动端 */
+  * {
+    scrollbar-width: /* thin 或 auto */;
+    scrollbar-color: /* 适合移动端的颜色搭配 */;
+  }
+
+  /* iOS 平滑滚动 */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* 方案三：隐藏滚动条但保留滚动功能 */
+.hide-scrollbar {
+  /* Webkit 浏览器隐藏滚动条 */
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background: transparent;
+  }
+
+  /* Firefox 隐藏滚动条 */
+  scrollbar-width: none;
+
+  /* IE 隐藏滚动条 */
+  -ms-overflow-style: none;
+}
+
+/* 方案四：禁用滚动 */
+.disable-scroll {
+  /* 完全禁用滚动 */
+  overflow: hidden;
+  
+  /* 禁用触摸滚动 */
+  touch-action: none;
+  
+  /* 防止在某些设备上的滚动 */
+  -webkit-overflow-scrolling: auto;
+}
+
+/* 临时禁用滚动（如模态框打开时） */
+.temp-disable-scroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  /* 保持当前滚动位置 */
+  top: /* 当前滚动位置的负值 */;
+}
+
+/* 特定方向禁用滚动 */
+.disable-scroll-x {
+  overflow-x: hidden;
+}
+
+.disable-scroll-y {
+  overflow-y: hidden;
+}
+
+/* 仅在特定设备上禁用滚动 */
+@media (max-width: 768px) {
+  .mobile-disable-scroll {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) {
+  .desktop-disable-scroll {
+    overflow: hidden;
+  }
+}
+
+/* ========== 链接样式配置 ========== */
+a {
+  color: /* 链接颜色 */;
+  text-decoration: /* 链接装饰 none | underline */;
+  transition: /* 链接悬停过渡效果 */;
+}
+
+a:hover {
+  color: /* 链接悬停颜色 */;
+  text-decoration: /* 悬停时的装饰 */;
+}
+
+a:visited {
+  color: /* 已访问链接颜色 */;
+}
+
+a:focus {
+  outline: /* 焦点样式 */;
+  outline-offset: /* 焦点偏移 */;
+}
+
+/* ========== 按钮基础样式 ========== */
+button, input[type="button"], input[type="submit"], input[type="reset"] {
+  background: /* 按钮背景 */;
+  color: /* 按钮文字颜色 */;
+  border: /* 按钮边框 */;
+  border-radius: /* 按钮圆角 */;
+  padding: /* 按钮内边距 */;
+  font-size: /* 按钮字体大小 */;
+  font-family: inherit; /* 继承字体 */
+  cursor: pointer;
+  transition: /* 按钮过渡效果 */;
+}
+
+button:hover, input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover {
+  background: /* 悬停背景 */;
+  transform: /* 悬停变换效果 */;
+}
+
+button:disabled, input[type="button"]:disabled, input[type="submit"]:disabled, input[type="reset"]:disabled {
+  background: /* 禁用状态背景 */;
+  color: /* 禁用状态文字颜色 */;
+  cursor: not-allowed;
+  opacity: /* 禁用状态透明度 */;
+}
+
+/* ========== 表单元素样式 ========== */
+input, textarea, select {
+  font-family: inherit; /* 继承字体 */
+  font-size: /* 表单字体大小 */;
+  border: /* 表单边框 */;
+  border-radius: /* 表单圆角 */;
+  padding: /* 表单内边距 */;
+  background: /* 表单背景 */;
+  color: /* 表单文字颜色 */;
+  outline: none;
+  transition: /* 表单过渡效果 */;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: /* 焦点边框颜色 */;
+  box-shadow: /* 焦点阴影 */;
+}
+
+input::placeholder, textarea::placeholder {
+  color: /* 占位符颜色 */;
+  opacity: /* 占位符透明度 */;
+}
+
+/* ========== 图片通用样式 ========== */
+img {
+  max-width: 100%; /* 图片响应式 */
+  height: auto; /* 保持宽高比 */
+  display: block; /* 去除底部空隙 */
+  border-radius: /* 图片圆角 */;
+}
+
+/* 图片懒加载占位 */
+img[loading="lazy"] {
+  background: /* 加载中背景色 */;
+  min-height: /* 最小高度 */;
+}
+
+/* ========== 列表样式重置 ========== */
+ul, ol {
+  list-style: none; /* 去除默认列表样式 */
+  padding-left: 0;
+}
+
+/* 有序列表自定义样式 */
+ol.custom-list {
+  counter-reset: /* 计数器重置 */;
+}
+
+ol.custom-list li {
+  counter-increment: /* 计数器递增 */;
+}
+
+ol.custom-list li::before {
+  content: /* 自定义序号样式 */;
+  color: /* 序号颜色 */;
+  font-weight: /* 序号字重 */;
+  margin-right: /* 序号右边距 */;
+}
+
+/* ========== 表格样式 ========== */
+table {
+  border-collapse: collapse; /* 合并边框 */
+  width: 100%;
+  background: /* 表格背景 */;
+  border-radius: /* 表格圆角 */;
+  overflow: hidden; /* 隐藏溢出 */
+}
+
+th, td {
+  padding: /* 单元格内边距 */;
+  text-align: /* 文本对齐 */;
+  border-bottom: /* 底部边框 */;
+}
+
+th {
+  background: /* 表头背景 */;
+  color: /* 表头文字颜色 */;
+  font-weight: /* 表头字重 */;
+}
+
+tr:hover {
+  background: /* 行悬停背景 */;
+}
+
+/* ========== 代码块样式 ========== */
+code {
+  background: /* 行内代码背景 */;
+  color: /* 行内代码颜色 */;
+  padding: /* 行内代码内边距 */;
+  border-radius: /* 行内代码圆角 */;
+  font-family: /* 代码字体 */;
+  font-size: /* 代码字体大小 */;
+}
+
+pre {
+  background: /* 代码块背景 */;
+  color: /* 代码块颜色 */;
+  padding: /* 代码块内边距 */;
+  border-radius: /* 代码块圆角 */;
+  overflow-x: auto; /* 水平滚动 */
+  line-height: /* 代码行高 */;
+  border: /* 代码块边框 */;
+}
+
+pre code {
+  background: none; /* 重置背景 */
+  padding: 0; /* 重置内边距 */
+  color: inherit; /* 继承颜色 */
+}
+
+/* ========== 引用块样式 ========== */
+blockquote {
+  margin: /* 引用块外边距 */;
+  padding: /* 引用块内边距 */;
+  border-left: /* 左边框 */;
+  background: /* 引用块背景 */;
+  color: /* 引用块文字颜色 */;
+  font-style: /* 字体样式 */;
+  position: relative;
+}
+
+blockquote::before {
+  content: /* 引用符号 */;
+  font-size: /* 引用符号大小 */;
+  color: /* 引用符号颜色 */;
+  position: absolute;
+  top: /* 符号位置 */;
+  left: /* 符号位置 */;
+}
+
+/* ========== 分割线样式 ========== */
+hr {
+  border: none;
+  height: /* 分割线高度 */;
+  background: /* 分割线背景 */;
+  margin: /* 分割线外边距 */;
+  border-radius: /* 分割线圆角 */;
+}
+
+/* ========== 响应式设计 ========== */
+/* 容器最大宽度 */
+.container {
+  max-width: /* 最大宽度 */;
+  margin: 0 auto; /* 居中 */
+  padding: /* 容器内边距 */;
+}
+
+/* 响应式网格 */
+.grid {
+  display: grid;
+  grid-template-columns: /* 网格列定义 */;
+  gap: /* 网格间距 */;
+}
+
+/* 响应式断点 */
+@media (max-width: 480px) {
+  /* 超小屏设备样式 */
+  .container {
+    padding: /* 小屏内边距 */;
+  }
+  
+  .grid {
+    grid-template-columns: /* 小屏网格 */;
+  }
+}
+
+@media (max-width: 768px) {
+  /* 小屏设备样式 */
+  html {
+    font-size: /* 小屏基础字体 */;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* 中屏设备样式 */
+  .container {
+    max-width: /* 中屏最大宽度 */;
+  }
+}
+
+/* ========== 辅助工具类 ========== */
+/* 文本对齐 */
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+/* 文本变换 */
+.text-uppercase { text-transform: uppercase; }
+.text-lowercase { text-transform: lowercase; }
+.text-capitalize { text-transform: capitalize; }
+
+/* 字体权重 */
+.font-thin { font-weight: 100; }
+.font-light { font-weight: 300; }
+.font-normal { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+.font-extrabold { font-weight: 800; }
+.font-black { font-weight: 900; }
+
+/* 显示控制 */
+.show { display: block !important; }
+.hide { display: none !important; }
+.invisible { visibility: hidden; }
+.visible { visibility: visible; }
+
+/* 定位 */
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.sticky { position: sticky; }
+
+/* 浮动 */
+.float-left { float: left; }
+.float-right { float: right; }
+.clear-both { clear: both; }
+
+/* 清除浮动 */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Flexbox 工具类 */
+.d-flex { display: flex; }
+.flex-column { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+.align-center { align-items: center; }
+.align-start { align-items: flex-start; }
+.align-end { align-items: flex-end; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
+
+/* 边距工具类 */
+.m-0 { margin: 0; }
+.mt-0 { margin-top: 0; }
+.mr-0 { margin-right: 0; }
+.mb-0 { margin-bottom: 0; }
+.ml-0 { margin-left: 0; }
+
+.p-0 { padding: 0; }
+.pt-0 { padding-top: 0; }
+.pr-0 { padding-right: 0; }
+.pb-0 { padding-bottom: 0; }
+.pl-0 { padding-left: 0; }
+
+/* 宽高工具类 */
+.w-full { width: 100%; }
+.w-auto { width: auto; }
+.h-full { height: 100%; }
+.h-auto { height: auto; }
+.h-screen { height: 100vh; }
+.w-screen { width: 100vw; }
+
+/* 圆角工具类 */
+.rounded-none { border-radius: 0; }
+.rounded-sm { border-radius: /* 小圆角 */; }
+.rounded { border-radius: /* 标准圆角 */; }
+.rounded-md { border-radius: /* 中等圆角 */; }
+.rounded-lg { border-radius: /* 大圆角 */; }
+.rounded-full { border-radius: 9999px; }
+
+/* 阴影工具类 */
+.shadow-none { box-shadow: none; }
+.shadow-sm { box-shadow: /* 小阴影 */; }
+.shadow { box-shadow: /* 标准阴影 */; }
+.shadow-md { box-shadow: /* 中等阴影 */; }
+.shadow-lg { box-shadow: /* 大阴影 */; }
+
+/* 过渡动画 */
+.transition { transition: all 0.15s ease-in-out; }
+.transition-colors { transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out; }
+.transition-opacity { transition: opacity 0.15s ease-in-out; }
+.transition-transform { transition: transform 0.15s ease-in-out; }
+
+/* 不透明度 */
+.opacity-0 { opacity: 0; }
+.opacity-25 { opacity: 0.25; }
+.opacity-50 { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+.opacity-100 { opacity: 1; }
+
+/* ========== 可访问性样式 ========== */
+/* 屏幕阅读器专用 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 焦点可见性 */
+.focus-visible:focus {
+  outline: /* 焦点样式 */;
+  outline-offset: /* 焦点偏移 */;
+}
+
+/* 高对比度支持 */
+@media (prefers-contrast: high) {
+  /* 高对比度模式样式 */
+  * {
+    border-color: /* 高对比度边框 */ !important;
+    color: /* 高对比度文字 */ !important;
+  }
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 深色模式颜色变量 */
+    --bg-color: /* 深色背景 */;
+    --text-color: /* 深色文字 */;
+    --border-color: /* 深色边框 */;
+    --link-color: /* 深色链接 */;
+  }
+  
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+  
+  a {
+    color: var(--link-color);
+  }
+}
+
+/* ========== 打印样式 ========== */
+@media print {
+  /* 打印专用样式 */
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+  
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  .page-break {
+    page-break-before: always;
+  }
+}
